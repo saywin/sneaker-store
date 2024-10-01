@@ -52,3 +52,5 @@ class ProductAdmin(admin.ModelAdmin):
             )
         else:
             return "-"
+
+    get_photo.short_description = "Мініатюра"
