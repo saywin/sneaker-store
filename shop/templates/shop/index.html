@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+ {{ title }}
+{% endblock %}
+
+
+{% block navbar %}
+  {% include "components/_navbar_index.html" %}
+{% endblock %}
+
+{% block main %}
+    <!-- Featured Start -->
+    {% include "components/_featured.html" %}
+    <!-- Featured End -->
+
+
+    <!-- Categories Start -->
+    {% include "components/_categories.html" %}
+    <!-- Categories End -->
+
+    <!-- Offer Start -->
+    {% include "components/_offer.html" %}
+    <!-- Offer End -->
+
+
+    <!-- Trandy Products Start -->
+    {% include "components/_trandy_products.html" %}
+    <!-- Products End -->
+
+
+    <!-- Subscribe Start -->
+    {% include "components/_subscribe.html" %}
+    <!-- Subscribe End -->
+
+
+    <!--Just Arrived Products Start -->
+    {% include "components/_just_arrived.html" %}
+    <!-- Products End -->
+
+
+    <!-- Vendor Start -->
+    {% include "components/_vendor.html" %}
+    <!-- Vendor End -->
+{% endblock %}

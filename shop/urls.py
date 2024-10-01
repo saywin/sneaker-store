@@ -3,4 +3,6 @@ from .views import *
 
 app_name = "shop"
 
-urlpatterns = []
+urlpatterns = [
+    path("", Index.as_view(), name="index")
+]
