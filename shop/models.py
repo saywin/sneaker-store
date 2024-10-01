@@ -14,6 +14,7 @@ class Category(models.Model):
     parent = models.ForeignKey(
         "self",
         on_delete=models.CASCADE,
+        null=True, blank=True,
         related_name="subcategories",
         verbose_name="Категорія",
     )
