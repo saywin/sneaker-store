@@ -14,13 +14,28 @@ class Category(models.Model):
     parent = models.ForeignKey(
         "self",
         on_delete=models.CASCADE,
-        null=True, blank=True,
+        null=True,
+        blank=True,
         related_name="subcategories",
         verbose_name="Категорія",
     )
 
     def get_absolute_url(self):
-        pass
+        """Силка на сторінку категорій"""
+        return reverse("shop:category_detail", kwargs={"slug": self.slug})
+
+    def get_category_photo(self):
+        """Для отримання зображення категорії"""
+        if self.image:
+            return self.image.url
+        return "https://lh5.googleusercontent.com/proxy/Lss2mIFziok_N0z_s2-0h5eYuHWJETArp0WOjKTicNoKLHVFyMuW9hEjQIrBuO-IkEiS8WAmTpEUP9fng6y4wd-IMz6sCSzEHi14EovGOQwh"
+
+    def get_all_subcategories(self):
+        """Рекурсивно отримує всі підкатегорії"""
+        all_subcategories = list(self.subcategories.all())
+        for subcategory in all_subcategories:
+            all_subcategories += subcategory.get_all_subcategories()
+        return all_subcategories
 
     def __str__(self):
         return self.title
@@ -35,16 +50,34 @@ class Category(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=255, verbose_name="Назва товару")
-    price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Ціна")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата створення")
+    price = models.DecimalField(
+        max_digits=7, decimal_places=2, verbose_name="Ціна"
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name="Дата створення"
+    )
     watched = models.PositiveIntegerField(default=0, verbose_name="Перегляди")
-    quantity = models.PositiveIntegerField(default=0, verbose_name="Кількість на складі")
-    description = models.TextField(default="Тут скоро з'явиться опис товару", verbose_name="Опис товару")
-    info = models.TextField(default="Додаткова інформація про товар", verbose_name="Інформація о товарі")
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products", verbose_name="Категорія")
+    quantity = models.PositiveIntegerField(
+        default=0, verbose_name="Кількість на складі"
+    )
+    description = models.TextField(
+        default="Тут скоро з'явиться опис товару", verbose_name="Опис товару"
+    )
+    info = models.TextField(
+        default="Додаткова інформація про товар",
+        verbose_name="Інформація о товарі",
+    )
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name="products",
+        verbose_name="Категорія",
+    )
     slug = models.SlugField(unique=True, null=True)
     size = models.IntegerField(default=37, verbose_name="Розмір")
-    color = models.CharField(max_length=100, default="gold", verbose_name="Колір/Матеріал")
+    color = models.CharField(
+        max_length=100, default="gold", verbose_name="Колір/Матеріал"
+    )
 
     def get_absolute_url(self):
         pass
@@ -53,7 +86,12 @@ class Product(models.Model):
         return self.title
 
     def __repr__(self):
-        return f"Товар: pk={self.pk}, title={self.title}, price={self.price}, quantity={self.quantity}"
+        return (
+            f"Товар: pk={self.pk}, "
+            f"title={self.title}, "
+            f"price={self.price}, "
+            f"quantity={self.quantity}"
+        )
 
     class Meta:
         verbose_name = "Товар"
@@ -62,7 +100,12 @@ class Product(models.Model):
 
 class Gallery(models.Model):
     image = models.ImageField(upload_to="products/", verbose_name="Зображення")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images", verbose_name="Товар")
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="images",
+        verbose_name="Товар",
+    )
 
     class Meta:
         verbose_name = "Зображення"

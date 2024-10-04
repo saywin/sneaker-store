@@ -20,7 +20,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
     def get_category_count(self, obj):
         if obj.products:
-            return len(obj.products.all())
+            return str(len(obj.products.all()))
         return "0"
 
     get_category_count.short_description = "Кількість товарів"

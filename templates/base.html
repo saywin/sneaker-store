@@ -1,4 +1,4 @@
-{% load static %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,26 +14,18 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    {% block favicon %}
+    {% endblock %}
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    {% include "components/_style.html" %}
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="{% static 'shop/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{% static 'shop/css/style.css' %}" rel="stylesheet">
 </head>
 
 <body>
-<!--    &lt;!&ndash; Topbar Start &ndash;&gt;-->
+
+    <!-- Topbar Start -->
 <!--    {% include "components/_topbar.html" %}-->
-<!--    &lt;!&ndash; Topbar End &ndash;&gt;-->
+    <!-- Topbar End -->
 
 
     <!-- Navbar Start -->

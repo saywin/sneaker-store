@@ -1,45 +1,50 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
  {{ title }}
 {% endblock %}
 
+{% block favicon %}
+    <link href="img/favicon.ico" rel="icon">
+{% endblock %}
 
 {% block navbar %}
-  {% include "components/_navbar_index.html" %}
+  {% include "shop/components/_navbar_index.html" %}
 {% endblock %}
 
 {% block main %}
     <!-- Featured Start -->
-    {% include "components/_featured.html" %}
+    {% include "shop/components/_featured.html" %}
     <!-- Featured End -->
 
 
     <!-- Categories Start -->
-    {% include "components/_categories.html" %}
+    {% include "shop/components/_categories.html" %}
     <!-- Categories End -->
 
     <!-- Offer Start -->
-    {% include "components/_offer.html" %}
+    {% include "shop/components/_offer.html" %}
     <!-- Offer End -->
 
 
     <!-- Trandy Products Start -->
-    {% include "components/_trandy_products.html" %}
+    {% include "shop/components/_trandy_products.html" %}
     <!-- Products End -->
 
 
     <!-- Subscribe Start -->
-    {% include "components/_subscribe.html" %}
+    {% include "shop/components/_subscribe.html" %}
     <!-- Subscribe End -->
 
 
     <!--Just Arrived Products Start -->
-    {% include "components/_just_arrived.html" %}
+    {% include "shop/components/_just_arrived.html" %}
     <!-- Products End -->
 
 
     <!-- Vendor Start -->
-    {% include "components/_vendor.html" %}
+    {% include "shop/components/_vendor.html" %}
+
     <!-- Vendor End -->
 {% endblock %}
